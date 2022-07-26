@@ -15,22 +15,22 @@ jobs:
         docker-file:
           - path: 1.16
             tags: "1.16"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.16-3.13
             tags: "1.16-3.13"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.17
             tags: "1.17"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.17-3.13
             tags: "1.17-3.13"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.18
             tags: "1.18"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.18-3.13
             tags: "1.18-3.13"
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
+            platforms: linux/amd64,linux/arm64,linux/386
 
     steps:
       - name: Checkout
@@ -39,7 +39,7 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=neur0toxine/golang-alpine-dumb-init
+          DOCKER_IMAGE=neur0toxine/golang-alpine
 
           TEMP="${{ matrix.docker-file.tags }}"
           TAGZ=($TEMP)

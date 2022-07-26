@@ -1,20 +1,13 @@
 FROM alpine:3.13
 
-RUN apk add --no-cache ca-certificates
-
-# set up nsswitch.conf for Go's "netgo" implementation
-# - https://github.com/golang/go/blob/go1.9.1/src/net/conf.go#L194-L275
-# - docker run --rm debian grep '^hosts:' /etc/nsswitch.conf
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-
 ENV PATH /usr/local/go/bin:$PATH
 
-ENV GOLANG_VERSION 1.18.4
-
 RUN set -eux; \
+	apk add --no-cache ca-certificates jq curl; \
+	([ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf); \
 	apk add --no-cache --virtual .fetch-deps gnupg; \
 	arch="$(apk --print-arch)"; \
-	url=; \
+	export GOVERSION="$(curl -fsSL 'https://go.dev/dl/?mode=json&include=1.18' | jq -r '.[0].version')"; \
 	case "$arch" in \
 		'x86_64') \
 			export GOAMD64='v1' GOARCH='amd64' GOOS='linux'; \
@@ -39,14 +32,10 @@ RUN set -eux; \
 			;; \
 		*) echo >&2 "error: unsupported architecture '$arch' (likely packaging update needed)"; exit 1 ;; \
 	esac; \
-	build=; \
-	if [ -z "$url" ]; then \
 # https://github.com/golang/go/issues/38536#issuecomment-616897960
-		build=1; \
-		url='https://dl.google.com/go/go1.18.4.src.tar.gz'; \
-		sha256='4525aa6b0e3cecb57845f4060a7075aafc9ab752bb7b6b4cf8a212d43078e1e4'; \
+	url="https://dl.google.com/go/$GOVERSION.src.tar.gz"; \
+	sha256='4525aa6b0e3cecb57845f4060a7075aafc9ab752bb7b6b4cf8a212d43078e1e4'; \
 # the precompiled binaries published by Go upstream are not compatible with Alpine, so we always build from source here 😅
-	fi; \
 	\
 	wget -O go.tgz.asc "$url.asc"; \
 	wget -O go.tgz "$url"; \
@@ -65,36 +54,34 @@ RUN set -eux; \
 	tar -C /usr/local -xzf go.tgz; \
 	rm go.tgz; \
 	\
-	if [ -n "$build" ]; then \
-		apk add --no-cache --virtual .build-deps \
-			bash \
-			gcc \
-			go \
-			musl-dev \
-		; \
-		\
-		export GOCACHE='/tmp/gocache'; \
-		\
-		( \
-			cd /usr/local/go/src; \
+	apk add --no-cache --virtual .build-deps \
+		bash \
+		gcc \
+		go \
+		musl-dev \
+	; \
+	\
+	export GOCACHE='/tmp/gocache'; \
+	\
+	( \
+		cd /usr/local/go/src; \
 # set GOROOT_BOOTSTRAP + GOHOST* such that we can build Go successfully
-			export GOROOT_BOOTSTRAP="$(go env GOROOT)" GOHOSTOS="$GOOS" GOHOSTARCH="$GOARCH"; \
-			./make.bash; \
-		); \
-		\
-		apk del --no-network .build-deps; \
-		\
+		export GOROOT_BOOTSTRAP="$(go env GOROOT)" GOHOSTOS="$GOOS" GOHOSTARCH="$GOARCH"; \
+		./make.bash; \
+	); \
+	\
+	apk del --no-network .build-deps; \
+	\
 # remove a few intermediate / bootstrapping files the official binary release tarballs do not contain
-		rm -rf \
-			/usr/local/go/pkg/*/cmd \
-			/usr/local/go/pkg/bootstrap \
-			/usr/local/go/pkg/obj \
-			/usr/local/go/pkg/tool/*/api \
-			/usr/local/go/pkg/tool/*/go_bootstrap \
-			/usr/local/go/src/cmd/dist/dist \
-			"$GOCACHE" \
-		; \
-	fi; \
+	rm -rf \
+		/usr/local/go/pkg/*/cmd \
+		/usr/local/go/pkg/bootstrap \
+		/usr/local/go/pkg/obj \
+		/usr/local/go/pkg/tool/*/api \
+		/usr/local/go/pkg/tool/*/go_bootstrap \
+		/usr/local/go/src/cmd/dist/dist \
+		"$GOCACHE" \
+	; \
 	\
 	apk del --no-network .fetch-deps; \
 	\
@@ -106,14 +93,11 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH
 
 RUN set -eux; \
-    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init && \
-    cd /tmp && \
-    git clone https://github.com/go-delve/delve && \
-    cd delve && \
-    go install github.com/go-delve/delve/cmd/dlv && \
-    cd / && \
-    go install github.com/cosmtrek/air@latest && \
-    rm -rf delve && \
-    chmod -R 777 /go
+    apk add --no-cache bash make git gcc libc-dev dumb-init && \
+    go install github.com/go-delve/delve/cmd/dlv@latest && \
+	go install github.com/cosmtrek/air@latest && \
+	go install github.com/jstemmer/go-junit-report@latest && \
+	go install github.com/axw/gocov/gocov@latest && \
+    chmod -R 777 "$GOPATH"
 WORKDIR /
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

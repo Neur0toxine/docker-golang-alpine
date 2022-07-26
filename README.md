@@ -17,6 +17,9 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 - jq
 - curl
 - air
+- delve
+- gocov
+- go-junit-report
 - dumb-init
 
 ### Available platforms
