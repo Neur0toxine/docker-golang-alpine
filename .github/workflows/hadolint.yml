@@ -7,7 +7,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          brew install hadolint
+      - run: brew install hadolint
+      - name: Lint Dockerfiles
+        run: |
           hadolint {1.16,1.16-3.13,1.17,1.17-3.13,1.18}/Dockerfile
-          hadolint --ignore=DL3059 --ignore=SC2155 1.18-3.13/Dockerfile
+          hadolint --ignore=DL3047 --ignore=DL3059 --ignore=SC2155 1.18-3.13/Dockerfile
