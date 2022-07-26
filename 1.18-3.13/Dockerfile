@@ -48,8 +48,8 @@ RUN set -eux; \
 # the precompiled binaries published by Go upstream are not compatible with Alpine, so we always build from source here 😅
 	fi; \
 	\
-	wget -O go.tgz.asc "$url.asc"; \
-	wget -O go.tgz "$url"; \
+	wget --progress=dot -O go.tgz.asc "$url.asc"; \
+	wget --progress=dot -O go.tgz "$url"; \
 	echo "$sha256 *go.tgz" | sha256sum -c -; \
 	\
 # https://github.com/golang/go/issues/14739#issuecomment-324767697
@@ -105,13 +105,15 @@ ENV PATH $GOPATH/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH
 
-RUN apk add --no-cache bash make git gcc libc-dev jq curl dumb-init
-RUN cd /tmp && \
+RUN set -eux; \
+    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init && \
+    cd /tmp && \
     git clone https://github.com/go-delve/delve && \
     cd delve && \
     go install github.com/go-delve/delve/cmd/dlv && \
-    cd .. && \
-    curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin && \
+    cd / && \
+    go install github.com/cosmtrek/air@latest && \
     rm -rf delve && \
     chmod -R 777 /go
+WORKDIR /
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
