@@ -1,0 +1,17 @@
+name: Test Docker image
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: |
+          docker run -i $(docker build -q 1.16) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"
+          docker run -i $(docker build -q 1.16-3.13) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"
+          docker run -i $(docker build -q 1.17) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"
+          docker run -i $(docker build -q 1.17-3.13) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"
+          docker run -i $(docker build -q 1.18) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"
+          docker run -i $(docker build -q 1.18-3.13) /bin/sh -c "go version && bash --version && make --version && git --version && ssh -V && gcc --version && jq --version && curl --version && air -v && dumb-init --version"

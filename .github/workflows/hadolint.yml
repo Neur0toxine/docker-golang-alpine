@@ -1,0 +1,11 @@
+name: Lint Dockerfiles
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: brew install hadolint
+      - run: hadolint {1.16,1.16-3.13,1.17,1.17-3.13,1.18,1.18-3.13}/Dockerfile
