@@ -27,11 +27,8 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 These Dockerfiles leverage the new `buildx` functionality and offer the following platforms:
 
 - linux/amd64
+- linux/386
 - linux/arm64
-- linux/arm/v7
-- linux/arm/v6
-- linux/ppc64le
-- linux/s390x
 
 ---
 
