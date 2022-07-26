@@ -1,4 +1,5 @@
 FROM golang:1.17-alpine3.13
+WORKDIR /
 RUN apk add --no-cache bash make git gcc libc-dev jq curl dumb-init
 RUN cd /tmp && \
     git clone https://github.com/go-delve/delve && \
