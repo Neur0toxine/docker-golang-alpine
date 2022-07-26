@@ -8,7 +8,7 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 
 ## What's included
 
-- Go 1.16
+- Go 1.16 / 1.17 / 1.18
 - bash
 - make
 - git
