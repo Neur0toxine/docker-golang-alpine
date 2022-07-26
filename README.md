@@ -1,6 +1,6 @@
-# Golang Alpine with additional packages & dumb-init
+# Golang Alpine with additional packages
 
-[![Docker Automated build](https://img.shields.io/docker/automated/Neur0toxine/golang-alpine.svg)](https://hub.docker.com/r/neur0toxine/golang-alpine/)
+[![Docker Automated build](https://img.shields.io/docker/automated/neur0toxine/golang-alpine.svg)](https://hub.docker.com/r/neur0toxine/golang-alpine/)
 [![buildx Status](https://github.com/Neur0toxine/docker-golang-alpine/workflows/buildx/badge.svg)](https://github.com/Neur0toxine/docker-golang-alpine/actions?query=workflow%3Abuildx)
 [![Lint Dockerfiles](https://github.com/Neur0toxine/docker-golang-alpine/workflows/Lint%20Dockerfiles/badge.svg)](https://github.com/Neur0toxine/docker-golang-alpine/actions?query=workflow%3A%22Lint+Dockerfiles%22)
 
