@@ -22,7 +22,7 @@ RUN set -eux; \
 			export GOARCH='arm64' GOOS='linux'; \
 			;; \
 		'x86') \
-			export GO386='softfloat' GOARCH='386' GOOS='linux'; \
+			export GOARCH='386' GOOS='linux'; \
 			;; \
 		'ppc64le') \
 			export GOARCH='ppc64le' GOOS='linux'; \
