@@ -12,7 +12,6 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 - bash
 - make
 - git
-- ssh
 - gcc
 - libc-dev
 - jq
