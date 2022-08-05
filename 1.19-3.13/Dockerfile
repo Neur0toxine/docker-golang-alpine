@@ -7,7 +7,7 @@ RUN set -eux; \
 	([ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf); \
 	apk add --no-cache --virtual .fetch-deps gnupg; \
 	arch="$(apk --print-arch)"; \
-	export GOVERSION="$(curl -fsSL 'https://go.dev/dl/?mode=json&include=1.18' | jq -r '.[0].version')"; \
+	export GOVERSION="$(curl -fsSL 'https://go.dev/dl/?mode=json&include=1.19' | jq -r '.[0].version')"; \
 	case "$arch" in \
 		'x86_64') \
 			export GOAMD64='v1' GOARCH='amd64' GOOS='linux'; \
