@@ -1,0 +1,14 @@
+--- musl-1.2.3/src/unistd/faccessat.c	2022-04-07 20:12:40.000000000 +0300
++++ musl-1.2.3-nofaccessat2/src/unistd/faccessat.c	2022-08-05 17:24:41.000000000 +0300
+@@ -25,11 +25,6 @@
+ 
+ int faccessat(int fd, const char *filename, int amode, int flag)
+ {
+-	if (flag) {
+-		int ret = __syscall(SYS_faccessat2, fd, filename, amode, flag);
+-		if (ret != -ENOSYS) return __syscall_ret(ret);
+-	}
+-
+ 	if (flag & ~AT_EACCESS)
+ 		return __syscall_ret(-EINVAL);
+ 
