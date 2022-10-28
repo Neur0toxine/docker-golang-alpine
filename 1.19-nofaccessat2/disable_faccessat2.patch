@@ -1,6 +1,6 @@
---- musl-1.2.3/src/unistd/faccessat.c	2022-04-07 20:12:40.000000000 +0300
-+++ musl-1.2.3-nofaccessat2/src/unistd/faccessat.c	2022-08-05 17:24:41.000000000 +0300
-@@ -25,11 +25,6 @@
+--- v1.2.3/src/unistd/faccessat.c	2022-04-07 20:12:40.000000000 +0300
++++ v1.2.1/src/unistd/faccessat.c	2020-08-04 07:21:09.000000000 +0300
+@@ -25,17 +25,12 @@
  
  int faccessat(int fd, const char *filename, int amode, int flag)
  {
@@ -8,7 +8,16 @@
 -		int ret = __syscall(SYS_faccessat2, fd, filename, amode, flag);
 -		if (ret != -ENOSYS) return __syscall_ret(ret);
 -	}
--
- 	if (flag & ~AT_EACCESS)
++	if (!flag || (flag==AT_EACCESS && getuid()==geteuid() && getgid()==getegid()))
++		return syscall(SYS_faccessat, fd, filename, amode, flag);
+ 
+-	if (flag & ~AT_EACCESS)
++	if (flag != AT_EACCESS)
  		return __syscall_ret(-EINVAL);
  
+-	if (!flag || (getuid()==geteuid() && getgid()==getegid()))
+-		return syscall(SYS_faccessat, fd, filename, amode);
+-
+ 	char stack[1024];
+ 	sigset_t set;
+ 	pid_t pid;
