@@ -12,7 +12,7 @@ RUN set -eux; \
     echo "builder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     chown -R builder:abuild /tmp/aports && \
     sudo -u builder sh -c 'abuild checksum && abuild-keygen -an && abuild -r' && \
-    find /home/builder -iname './*.apk' -exec apk add --allow-untrusted --no-cache {} \;; \
+    find /home/builder -type f -name '*.apk' -exec apk add --allow-untrusted --no-cache {} \;; \
     sudo -u builder sh -c 'abuild clean && abuild cleancache' && \
     apk del --no-network .build-deps && \
     deluser builder && \
