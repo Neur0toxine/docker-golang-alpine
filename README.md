@@ -8,7 +8,8 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 
 ## What's included
 
-- Go 1.16 / 1.17 / 1.18
+- Go 1.16 / 1.17 / 1.18 / 1.19
+- images with patched musl to disable `faccessat2` syscall (workaround for CI systems with docker & seccomp filter bug, [see this](https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.14.0#faccessat2))
 - bash
 - make
 - git
@@ -19,6 +20,7 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 - air
 - delve
 - gocov
+- merge-junit
 - go-junit-report
 - dumb-init
 

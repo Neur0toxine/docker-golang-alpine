@@ -28,14 +28,11 @@ jobs:
           - path: 1.18
             tags: "1.18"
             platforms: linux/amd64,linux/arm64,linux/386
-          - path: 1.18-3.13
-            tags: "1.18-3.13"
+          - path: 1.18-nofaccessat2
+            tags: "1.18-nofaccessat2"
             platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.19
             tags: "1.19"
-            platforms: linux/amd64,linux/arm64,linux/386
-          - path: 1.19-3.13
-            tags: "1.19-3.13"
             platforms: linux/amd64,linux/arm64,linux/386
           - path: 1.19-nofaccessat2
             tags: "1.19-nofaccessat2"
