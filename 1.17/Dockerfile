@@ -2,7 +2,7 @@ FROM golang:1.17-alpine
 RUN set -eux; \
     apk add --no-cache bash make git gcc libc-dev jq curl dumb-init && \
     go install github.com/go-delve/delve/cmd/dlv@latest && \
-	go install github.com/cosmtrek/air@v1.40.0 && \
+	go install github.com/cosmtrek/air@v1.27.8 && \
 	go install github.com/jstemmer/go-junit-report@latest && \
 	go install github.com/axw/gocov/gocov@latest && \
     chmod -R 777 "$GOPATH" && \
