@@ -21,6 +21,7 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18 and alpine with dumb-init and 
 - delve
 - gocov
 - merge-junit
+- gotestsum
 - go-junit-report
 - dumb-init
 
