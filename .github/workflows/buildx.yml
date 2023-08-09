@@ -37,6 +37,18 @@ jobs:
           - path: 1.19-nofaccessat2
             tags: "1.19-nofaccessat2"
             platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.20
+            tags: "1.20"
+            platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.20-nofaccessat2
+            tags: "1.20-nofaccessat2"
+            platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.21
+            tags: "1.21"
+            platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.21-nofaccessat2
+            tags: "1.21-nofaccessat2"
+            platforms: linux/amd64,linux/arm64,linux/386
 
     steps:
       - name: Checkout
