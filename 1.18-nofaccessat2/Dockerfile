@@ -18,7 +18,7 @@ RUN set -eux; \
     deluser builder && \
     rm -rf /home/builder /var/cache/distfiles /tmp/aports
 RUN set -eux; \
-    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init && \
+    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init mailcap && \
     go install github.com/go-delve/delve/cmd/dlv@latest && \
 	go install github.com/cosmtrek/air@latest && \
 	go install github.com/jstemmer/go-junit-report@latest && \
