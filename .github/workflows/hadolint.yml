@@ -10,4 +10,4 @@ jobs:
       - run: brew install hadolint
       - name: Lint Dockerfiles
         run: |
-          hadolint {1.16,1.16-3.13,1.17,1.17-3.13,1.18,1.18-nofaccessat2,1.19,1.19-nofaccessat2,1.20,1.20-nofaccessat2,1.21,1.21-nofaccessat2}/Dockerfile
+          hadolint {1.16,1.16-3.13,1.17,1.17-3.13,1.18,1.18-nofaccessat2,1.19,1.19-nofaccessat2,1.20,1.20-nofaccessat2,1.21,1.21-nofaccessat2,1.22,1.22-nofaccessat2}/Dockerfile
