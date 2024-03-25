@@ -1,8 +1,8 @@
 FROM golang:1.19-alpine
 RUN set -eux; \
-    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init mailcap && \
+    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init mailcap tzdata && \
     go install github.com/go-delve/delve/cmd/dlv@latest && \
-	go install github.com/cosmtrek/air@latest && \
+	go install github.com/cosmtrek/air@v1.41.0 && \
 	go install github.com/jstemmer/go-junit-report@latest && \
 	go install github.com/axw/gocov/gocov@latest && \
     go install gotest.tools/gotestsum@latest && \

@@ -8,7 +8,7 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 and alpine w
 
 ## What's included
 
-- Go 1.16 / 1.17 / 1.18 / 1.19 / 1.20 / 1.21
+- Go 1.16 / 1.17 / 1.18 / 1.19 / 1.20 / 1.21 / 1.22
 - images with patched musl to disable `faccessat2` syscall (workaround for CI systems with docker & seccomp filter bug, [see this](https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.14.0#faccessat2))
 - bash
 - make
