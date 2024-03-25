@@ -1,6 +1,6 @@
 FROM golang:1.16-alpine
 RUN set -eux; \
-    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init mailcap && \
+    apk add --no-cache bash make git gcc libc-dev jq curl dumb-init mailcap tzdata && \
     go install github.com/go-delve/delve/cmd/dlv@v1.9.0 && \
 	go install github.com/cosmtrek/air@v1.27.8 && \
 	go install github.com/jstemmer/go-junit-report@latest && \
