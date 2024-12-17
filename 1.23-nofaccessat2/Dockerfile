@@ -22,7 +22,7 @@ RUN set -eux; \
     go install github.com/go-delve/delve/cmd/dlv@latest && \
 	go install github.com/air-verse/air@latest && \
 	go install github.com/jstemmer/go-junit-report@latest && \
-	go install github.com/axw/gocov/gocov@latest && \
+	go install github.com/axw/gocov/gocov@v1.2.1 && \
     go install gotest.tools/gotestsum@latest && \
     chmod -R 777 "$GOPATH" && \
     curl -L https://github.com/tobni/merge-junit/releases/download/v0.2.1/merge-junit-v0.2.1-x86_64-unknown-linux-musl.tar.gz | tar -xz && \
