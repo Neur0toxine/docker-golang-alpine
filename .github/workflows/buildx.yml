@@ -55,6 +55,12 @@ jobs:
           - path: 1.22-nofaccessat2
             tags: "1.22-nofaccessat2"
             platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.23
+            tags: "1.23"
+            platforms: linux/amd64,linux/arm64,linux/386
+          - path: 1.23-nofaccessat2
+            tags: "1.23-nofaccessat2"
+            platforms: linux/amd64,linux/arm64,linux/386
 
     steps:
       - name: Checkout
