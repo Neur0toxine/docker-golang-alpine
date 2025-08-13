@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build the Docker image
         run: |
           docker run -i $(docker build -q 1.16) /bin/sh -c "go version && bash --version && make --version && git --version && gcc --version && jq --version && curl --version && air -v && dlv version&& which gocov && go-junit-report -version  && dumb-init --version && merge-junit --version"
