@@ -4,11 +4,11 @@
 [![buildx Status](https://github.com/Neur0toxine/docker-golang-alpine/workflows/buildx/badge.svg)](https://github.com/Neur0toxine/docker-golang-alpine/actions?query=workflow%3Abuildx)
 [![Lint Dockerfiles](https://github.com/Neur0toxine/docker-golang-alpine/workflows/Lint%20Dockerfiles/badge.svg)](https://github.com/Neur0toxine/docker-golang-alpine/actions?query=workflow%3A%22Lint+Dockerfiles%22)
 
-A minimal Dockerfile based on Go 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 and alpine with dumb-init and some other useful packages.
+A minimal Dockerfile based on Go Alpine images with additional packages.
 
 ## What's included
 
-- Go 1.16 / 1.17 / 1.18 / 1.19 / 1.20 / 1.21 / 1.22
+- Go
 - images with patched musl to disable `faccessat2` syscall (workaround for CI systems with docker & seccomp filter bug, [see this](https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.14.0#faccessat2))
 - bash
 - make
@@ -19,7 +19,7 @@ A minimal Dockerfile based on Go 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 and alpine w
 - curl
 - air
 - delve
-- gocov
+- gocov (up to and including Go 1.24)
 - merge-junit
 - gotestsum
 - go-junit-report
