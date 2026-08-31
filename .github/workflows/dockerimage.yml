@@ -56,4 +56,4 @@ jobs:
           '
       - name: Test gocov
         if: ${{ !startsWith(matrix.image, '1.25') && !startsWith(matrix.image, '1.26') && !startsWith(matrix.image, '1.27') }}
-        run: docker run --rm golang-alpine-test command -v gocov
+        run: docker run --rm golang-alpine-test /bin/sh -c 'command -v gocov'
